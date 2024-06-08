@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184933245373",
+    "project_id": "flutter-scanqr-ff6f0",
+    "storage_bucket": "flutter-scanqr-ff6f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184933245373:android:9ef675b9c21e9c4c96f2d4",
+        "android_client_info": {
+          "package_name": "com.example.flutter_scanqr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7Wwc8wWXkQTt9HiH648Z3BCAB3n5_s2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
