@@ -3,16 +3,13 @@ import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_scanqr/models/product_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pdfw;
 import 'package:open_file/open_file.dart';
-import 'package:pdf/widgets.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:meta/meta.dart';
+
 
 part 'product_event.dart';
 part 'product_state.dart';
@@ -134,7 +131,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                       ),
                       // Kode Barang
                       pdfw.Padding(
-                        padding: pdfw.EdgeInsets.all(20),
+                        padding: const pdfw.EdgeInsets.all(20),
                         child: pdfw.Text(product.code!,
                             style: const pdfw.TextStyle(
                               fontSize: 10,
@@ -259,7 +256,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
         await OpenFile.open(file.path);
 
-        print(file.path);
+       
 
         emit(StateSuccessExport());
       } on FirebaseException catch (e) {

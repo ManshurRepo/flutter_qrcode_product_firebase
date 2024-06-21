@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +21,7 @@ class AddProductPage extends StatelessWidget {
             'Add Product',
             style: TextStyle(color: Colors.white),
           ),
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: ListView(
           padding: const EdgeInsets.all(20),

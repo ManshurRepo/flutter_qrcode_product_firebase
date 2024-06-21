@@ -7,12 +7,26 @@ import 'package:flutter_scanqr/models/product_model.dart';
 import 'package:flutter_scanqr/routes/router.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-class HomePage extends StatelessWidget {
+import 'product_detail.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  bool _isMounted = true;
+
+  @override
+  void dispose() {
+    _isMounted = false;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -75,45 +89,49 @@ class HomePage extends StatelessWidget {
                 title = "QR Code";
                 icon = Icons.qr_code;
                 onTap = () async {
+                  if (!_isMounted) return;
+
                   String barcode = await FlutterBarcodeScanner.scanBarcode(
-                      "#000000", "CANCEL", true, ScanMode.QR);
-                  //get data dari firebase search by product id
-                  // Future<Map<String, dynamic>> getProductById(String id) async {
-                  //   try {
-                  //     var hasil = await firestore.collection("products").doc(id).get();
+                    "#000000", "CANCEL", true, ScanMode.QR);
+  // if (!mounted) return;
+//                   // setState(() {
+//                   //   ScaffoldMessenger.of(context)
+//                   //       .showSnackBar(SnackBar(content: Text(barcode)));
+//                   //   context.goNamed(Routes.products);
+//                   // });
+                  if (barcode.isNotEmpty) {
+                    try {
+                      var firestore = FirebaseFirestore.instance;
+                      var snapshot = await firestore.collection("products").where("code", isEqualTo: barcode).get();
+                      
+                      if (!_isMounted) return;
 
-                  //     if(hasil.data() == null) {
+                      if (snapshot.docs.isEmpty) {
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Produk dengan kode $barcode tidak ditemukan")),
+                        );
+                      } else {
+                        var productData = snapshot.docs.first.data();
+                        Product product = Product.fromJson(productData);
 
-                  //         return {
-                  //       "error": true,
-                  //       "message":
-                  //           "Tidak ada product id didatabse"
-                  //     };
-                  //     }
-                  //     return {
-                  //       "error": false,
-                  //       "message":
-                  //           "Berhasil mendapatkan detail product dari product code ini",
-                  //           "data" : Product.fromJson(hasil.data()!),
-                  //     };
-                  //   } catch (e) {
-                  //     return {
-                  //       "error": true,
-                  //       "message":
-                  //           "Tidak mendapatkan detail product dari product code ini"
-                  //     };
-                  //   }
-                  // }
-                  // ignore: use_build_context_synchronously
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Hasil scan: $barcode"),
-                      duration: Duration(seconds: 2), // Durasi snackbar 2 detik
-                    ),
-                  );
+                        Navigator.push(
+                          // ignore: use_build_context_synchronously
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailProductPage(product.productId!, product),
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      if (!_isMounted) return;
 
-                  // ignore: use_build_context_synchronously
-                  context.goNamed(Routes.detailProduct);
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error: $e")),
+                      );
+                    }
+                  }
                 };
                 break;
               case 3:
@@ -124,6 +142,7 @@ class HomePage extends StatelessWidget {
                 };
                 break;
             }
+
             return Material(
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.circular(20),
@@ -138,7 +157,7 @@ class HomePage extends StatelessWidget {
                             listener: (context, state) {},
                             builder: (context, state) {
                               if (state is StateLoadingExport) {
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               }
                               return SizedBox(
                                 height: 50,

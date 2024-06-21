@@ -16,8 +16,12 @@ class ProductsPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('All Products'),
+          title: const Text(
+            'All Products',
+            style: TextStyle(color: Colors.white),
+          ),
           backgroundColor: Colors.blue,
+          iconTheme: const IconThemeData(color: Colors.white),
         ),
         body: StreamBuilder<QuerySnapshot<Product>>(
           stream: productB.streamProducts(),
@@ -57,14 +61,13 @@ class ProductsPage extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
-                        context.goNamed(Routes.detailProduct,
-                        pathParameters: {
-                          "productId" : product.productId!,
-                        },
-                       
-                        extra: product,
+                        context.goNamed(
+                          Routes.detailProduct,
+                          pathParameters: {
+                            "productId": product.productId!,
+                          },
+                          extra: product,
                         );
-                        
                       },
                       child: Container(
                         padding: const EdgeInsets.all(15),
@@ -76,24 +79,25 @@ class ProductsPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    product.code!,
+                                    "Kode : ${product.code!}",
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 5),
-                                  Text(product.name!),
+                                  Text("Nama : ${product.name!}"),
                                   Text("Jumlah: ${product.qty}"),
                                 ],
                               ),
                             ),
                             SizedBox(
-                                height: 50,
-                                width: 50,
-                                child: QrImageView(
-                                  data: product.code!,
-                                  size: 200,
-                                  version: QrVersions.auto,
-                                ),)
+                              height: 50,
+                              width: 50,
+                              child: QrImageView(
+                                data: product.code!,
+                                size: 200,
+                                version: QrVersions.auto,
+                              ),
+                            )
                           ],
                         ),
                       ),
