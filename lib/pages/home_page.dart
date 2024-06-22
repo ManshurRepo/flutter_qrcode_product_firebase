@@ -7,7 +7,7 @@ import 'package:flutter_scanqr/models/product_model.dart';
 import 'package:flutter_scanqr/routes/router.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import 'product_detail.dart';
+import 'product_update.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -113,13 +113,13 @@ class HomePageState extends State<HomePage> {
                         );
                       } else {
                         var productData = snapshot.docs.first.data();
-                        Product product = Product.fromJson(productData);
+                        ProductModel product = ProductModel.fromJson(productData);
 
                         Navigator.push(
                           // ignore: use_build_context_synchronously
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailProductPage(product.productId!, product),
+                            builder: (context) => UpdateProductPage(product.productId!, product),
                           ),
                         );
                       }
@@ -135,8 +135,8 @@ class HomePageState extends State<HomePage> {
                 };
                 break;
               case 3:
-                title = "Catalog";
-                icon = Icons.document_scanner_rounded;
+                title = "Download PDF";
+                icon = Icons.picture_as_pdf;
                 onTap = () {
                   context.read<ProductBloc>().add(ExportProductEventToPdf());
                 };

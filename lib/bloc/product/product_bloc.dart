@@ -10,18 +10,18 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pdfw;
 import 'package:open_file/open_file.dart';
 
-
 part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Stream<QuerySnapshot<Product>> streamProducts() async* {
+  Stream<QuerySnapshot<ProductModel>> streamProducts() async* {
     yield* firestore
         .collection("products")
-        .withConverter<Product>(
-          fromFirestore: (snapshot, _) => Product.fromJson(snapshot.data()!),
+        .withConverter<ProductModel>(
+          fromFirestore: (snapshot, _) =>
+              ProductModel.fromJson(snapshot.data()!),
           toFirestore: (product, _) => product.toJson(),
         )
         .snapshots();
@@ -32,9 +32,24 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       try {
         emit(StateLoadingAdd());
         // add product to firebase
-        var hasil = await firestore
-            .collection("products")
-            .add({"name": event.name, "code": event.code, "qty": event.qty});
+        var hasil = await firestore.collection("products").add({
+          "name": event.name,
+          "code": event.code,
+          "qty": event.qty,
+          "sku" : event.sku,
+          "sn" : event.sn,
+          "divisi" : event.divisi,
+          "keterangan" : event.keterangan,
+          "lisensi" : event.lisensi,
+          "lisensi2" : event.lisensi2,
+          "posisi" : event.posisi,
+          "status" : event.status,
+          "expired" : event.expired,
+          "order" : event.order,
+          "receipt" : event.receipt
+
+        });
+        
 
         await firestore
             .collection("products")
@@ -83,31 +98,24 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         // 1. ambil data product dari firebase
         var querySnap = await firestore
             .collection("products")
-            .withConverter<Product>(
+            .withConverter<ProductModel>(
               fromFirestore: (snapshot, _) =>
-                  Product.fromJson(snapshot.data()!),
+                  ProductModel.fromJson(snapshot.data()!),
               toFirestore: (product, _) => product.toJson(),
             )
             .get();
 
-        List<Product> allProducts = [];
+        List<ProductModel> allProducts = [];
 
         // reset all products untuk mengatasi duplikat
         // allProducts;
         // all products sudah ada isinya *tergantung isi didatabasenya.
         for (var element in querySnap.docs) {
-          Product product = element.data();
+          ProductModel product = element.data();
           allProducts.add(product);
         }
 
         // 2. buat pdf  -> disimpan di lokal -> diarahkan dengan path
-
-        //font style
-        // var data = await rootBundle.load("assets/fonts/OpenSans-Regular.ttf");
-
-        // var myFont = Font.ttf(data);
-
-        // var myStyle = TextStyle(font: myFont);
 
         final pdf = pdfw.Document();
         pdf.addPage(
@@ -117,27 +125,27 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               List<pdfw.TableRow> allData = List.generate(
                 allProducts.length,
                 (index) {
-                  Product product = allProducts[index];
+                  ProductModel product = allProducts[index];
                   return pdfw.TableRow(
                     children: [
                       // No
-                      pdfw.Padding(
-                        padding: const pdfw.EdgeInsets.all(20),
-                        child: pdfw.Text("No ${index + 1}",
-                            style: const pdfw.TextStyle(
-                              fontSize: 10,
-                            ),
-                            textAlign: pdfw.TextAlign.center),
-                      ),
+                      // pdfw.Padding(
+                      //   padding: const pdfw.EdgeInsets.all(20),
+                      //   child: pdfw.Text("No ${index + 1}",
+                      //       style: const pdfw.TextStyle(
+                      //         fontSize: 10,
+                      //       ),
+                      //       textAlign: pdfw.TextAlign.center),
+                      // ),
                       // Kode Barang
-                      pdfw.Padding(
-                        padding: const pdfw.EdgeInsets.all(20),
-                        child: pdfw.Text(product.code!,
-                            style: const pdfw.TextStyle(
-                              fontSize: 10,
-                            ),
-                            textAlign: pdfw.TextAlign.center),
-                      ),
+                      // pdfw.Padding(
+                      //   padding: const pdfw.EdgeInsets.all(20),
+                      //   child: pdfw.Text(product.code!,
+                      //       style: const pdfw.TextStyle(
+                      //         fontSize: 10,
+                      //       ),
+                      //       textAlign: pdfw.TextAlign.center),
+                      // ),
                       // Nama Barang
                       pdfw.Padding(
                         padding: const pdfw.EdgeInsets.all(20),
@@ -148,14 +156,14 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                             textAlign: pdfw.TextAlign.center),
                       ),
                       // Qty
-                      pdfw.Padding(
-                        padding: const pdfw.EdgeInsets.all(20),
-                        child: pdfw.Text("${product.qty}",
-                            style: const pdfw.TextStyle(
-                              fontSize: 10,
-                            ),
-                            textAlign: pdfw.TextAlign.center),
-                      ),
+                      // pdfw.Padding(
+                      //   padding: const pdfw.EdgeInsets.all(20),
+                      //   child: pdfw.Text("${product.qty}",
+                      //       style: const pdfw.TextStyle(
+                      //         fontSize: 10,
+                      //       ),
+                      //       textAlign: pdfw.TextAlign.center),
+                      // ),
                       // QR Code
                       pdfw.Padding(
                           padding: const pdfw.EdgeInsets.all(20),
@@ -172,7 +180,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
               );
               return [
                 pdfw.Center(
-                  child: pdfw.Text("Catalog Products",
+                  child: pdfw.Text("Products Barcode",
                       style: const pdfw.TextStyle(fontSize: 24),
                       textAlign: pdfw.TextAlign.center),
                 ),
@@ -184,26 +192,26 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                     pdfw.TableRow(
                       children: [
                         // No
-                        pdfw.Padding(
-                          padding: const pdfw.EdgeInsets.all(20),
-                          child: pdfw.Text("No",
-                              style: pdfw.TextStyle(
-                                fontSize: 10,
-                                fontWeight: pdfw.FontWeight.bold,
-                              ),
-                              textAlign: pdfw.TextAlign.center),
-                        ),
+                        // pdfw.Padding(
+                        //   padding: const pdfw.EdgeInsets.all(20),
+                        //   child: pdfw.Text("No",
+                        //       style: pdfw.TextStyle(
+                        //         fontSize: 10,
+                        //         fontWeight: pdfw.FontWeight.bold,
+                        //       ),
+                        //       textAlign: pdfw.TextAlign.center),
+                        // ),
 
-                        // Kode Barang
-                        pdfw.Padding(
-                          padding: const pdfw.EdgeInsets.all(20),
-                          child: pdfw.Text("Product Code",
-                              style: pdfw.TextStyle(
-                                fontSize: 10,
-                                fontWeight: pdfw.FontWeight.bold,
-                              ),
-                              textAlign: pdfw.TextAlign.center),
-                        ),
+                        // // Kode Barang
+                        // pdfw.Padding(
+                        //   padding: const pdfw.EdgeInsets.all(20),
+                        //   child: pdfw.Text("Product Code",
+                        //       style: pdfw.TextStyle(
+                        //         fontSize: 10,
+                        //         fontWeight: pdfw.FontWeight.bold,
+                        //       ),
+                        //       textAlign: pdfw.TextAlign.center),
+                        // ),
                         // Nama Barang
                         pdfw.Padding(
                           padding: const pdfw.EdgeInsets.all(20),
@@ -215,15 +223,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                               textAlign: pdfw.TextAlign.center),
                         ),
                         // Qty
-                        pdfw.Padding(
-                          padding: const pdfw.EdgeInsets.all(20),
-                          child: pdfw.Text("Quantity",
-                              style: pdfw.TextStyle(
-                                fontSize: 10,
-                                fontWeight: pdfw.FontWeight.bold,
-                              ),
-                              textAlign: pdfw.TextAlign.center),
-                        ),
+                        // pdfw.Padding(
+                        //   padding: const pdfw.EdgeInsets.all(20),
+                        //   child: pdfw.Text("Quantity",
+                        //       style: pdfw.TextStyle(
+                        //         fontSize: 10,
+                        //         fontWeight: pdfw.FontWeight.bold,
+                        //       ),
+                        //       textAlign: pdfw.TextAlign.center),
+                        // ),
                         // QR Code
                         pdfw.Padding(
                           padding: const pdfw.EdgeInsets.all(20),
@@ -255,8 +263,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         await file.writeAsBytes(bytes);
 
         await OpenFile.open(file.path);
-
-       
 
         emit(StateSuccessExport());
       } on FirebaseException catch (e) {

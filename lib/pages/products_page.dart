@@ -23,7 +23,7 @@ class ProductsPage extends StatelessWidget {
           backgroundColor: Colors.blue,
           iconTheme: const IconThemeData(color: Colors.white),
         ),
-        body: StreamBuilder<QuerySnapshot<Product>>(
+        body: StreamBuilder<QuerySnapshot<ProductModel>>(
           stream: productB.streamProducts(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -42,7 +42,7 @@ class ProductsPage extends StatelessWidget {
               );
             }
 
-            List<Product> allProducts = [];
+            List<ProductModel> allProducts = [];
 
             for (var element in snapshot.data!.docs) {
               allProducts.add(element.data());
@@ -53,7 +53,7 @@ class ProductsPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                 itemCount: allProducts.length,
                 itemBuilder: (context, index) {
-                  Product product = allProducts[index];
+                  ProductModel product = allProducts[index];
                   return Card(
                     elevation: 5,
                     shape: RoundedRectangleBorder(
@@ -62,7 +62,7 @@ class ProductsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       onTap: () {
                         context.goNamed(
-                          Routes.detailProduct,
+                          Routes.updateProduct,
                           pathParameters: {
                             "productId": product.productId!,
                           },
@@ -70,34 +70,44 @@ class ProductsPage extends StatelessWidget {
                         );
                       },
                       child: Container(
+                        decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Colors.black, width: 1.5)),
                         padding: const EdgeInsets.all(15),
-                        height: 100,
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Kode : ${product.code!}",
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text("Nama : ${product.name!}"),
-                                  Text("Jumlah: ${product.qty}"),
-                                ],
+                            Center(
+                              child: SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: QrImageView(
+                                  data: product.code!,
+                                  size: 200,
+                                  version: QrVersions.auto,
+                                ),
                               ),
                             ),
-                            SizedBox(
-                              height: 50,
-                              width: 50,
-                              child: QrImageView(
-                                data: product.code!,
-                                size: 200,
-                                version: QrVersions.auto,
-                              ),
-                            )
+                            SizedBox(height: 20),
+                            Text(
+                              "Kode : ${product.code!}",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 5),
+                            Text("Nama : ${product.name!}"),
+                            Text("Jumlah: ${product.qty}"),
+                            Text("SN: ${product.sn}"),
+                            Text("SKU: ${product.sku}"),
+                            Text("divisi: ${product.divisi}"),
+                            Text("keterangan: ${product.keterangan}"),
+                            Text("lisensi: ${product.lisensi}"),
+                            Text("lisensi2: ${product.lisensi2}"),
+                            Text("posisi: ${product.posisi}"),
+                            Text("status: ${product.status}"),
+                            Text("tgl order: ${product.order}"),
+                            Text("tgl receipt: ${product.receipt}"),
+                            Text("tgl expired: ${product.expired}"),
                           ],
                         ),
                       ),

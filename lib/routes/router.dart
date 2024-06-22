@@ -1,5 +1,5 @@
 import 'package:flutter_scanqr/models/product_model.dart';
-import 'package:flutter_scanqr/pages/product_detail.dart';
+import 'package:flutter_scanqr/pages/product_update.dart';
 import 'package:flutter_scanqr/pages/products_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,10 +36,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: ':productId',
-              name: Routes.detailProduct,
-              builder: (context, state) => DetailProductPage(
+              name: Routes.updateProduct,
+              builder: (context, state) => UpdateProductPage(
                 state.pathParameters['productId'].toString(),
-                state.extra as Product
+                state.extra as ProductModel
               ),
             )
           ],

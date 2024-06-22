@@ -5,6 +5,7 @@ import 'package:flutter_scanqr/bloc/auth/auth_bloc.dart';
 import 'package:flutter_scanqr/bloc/product/product_bloc.dart';
 import 'firebase_options.dart';
 import 'routes/router.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,3 +36,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
