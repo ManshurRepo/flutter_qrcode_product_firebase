@@ -31,25 +31,23 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<AddProduct>((event, emit) async {
       try {
         emit(StateLoadingAdd());
-        // add product to firebase
+
         var hasil = await firestore.collection("products").add({
           "name": event.name,
           "code": event.code,
           "qty": event.qty,
-          "sku" : event.sku,
-          "sn" : event.sn,
-          "divisi" : event.divisi,
-          "keterangan" : event.keterangan,
-          "lisensi" : event.lisensi,
-          "lisensi2" : event.lisensi2,
-          "posisi" : event.posisi,
-          "status" : event.status,
-          "expired" : event.expired,
-          "order" : event.order,
-          "receipt" : event.receipt
-
+          "sku": event.sku,
+          "sn": event.sn,
+          "divisi": event.divisi,
+          "keterangan": event.keterangan,
+          "lisensi": event.lisensi,
+          "lisensi2": event.lisensi2,
+          "posisi": event.posisi,
+          "status": event.status,
+          "expired": event.expired,
+          "order": event.order,
+          "receipt": event.receipt
         });
-        
 
         await firestore
             .collection("products")
@@ -67,8 +65,22 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(StateLoadingEdit());
 
         await firestore.collection("products").doc(event.productId).update({
-          "name": event.name,
+          // "name": event.name,
+          // "qty": event.qty,
+           "name": event.name,
+          "code": event.code,
           "qty": event.qty,
+          "sku": event.sku,
+          "sn": event.sn,
+          "divisi": event.divisi,
+          "keterangan": event.keterangan,
+          "lisensi": event.lisensi,
+          "lisensi2": event.lisensi2,
+          "posisi": event.posisi,
+          "status": event.status,
+          "expired": event.expired,
+          "order": event.order,
+          "receipt": event.receipt
         });
 
         emit(StateSuccessEdit());
@@ -81,7 +93,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<DeleteProduct>((event, emit) async {
       try {
         emit(StateLoadingDelete());
-        // add product to firebase
+
         await firestore.collection("products").doc(event.id).delete();
         emit(StateSuccessDelete());
       } on FirebaseException catch (e) {
@@ -95,7 +107,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       try {
         emit(StateLoadingExport());
 
-        // 1. ambil data product dari firebase
         var querySnap = await firestore
             .collection("products")
             .withConverter<ProductModel>(
@@ -107,15 +118,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
         List<ProductModel> allProducts = [];
 
-        // reset all products untuk mengatasi duplikat
-        // allProducts;
-        // all products sudah ada isinya *tergantung isi didatabasenya.
         for (var element in querySnap.docs) {
           ProductModel product = element.data();
           allProducts.add(product);
         }
-
-        // 2. buat pdf  -> disimpan di lokal -> diarahkan dengan path
 
         final pdf = pdfw.Document();
         pdf.addPage(
@@ -128,25 +134,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                   ProductModel product = allProducts[index];
                   return pdfw.TableRow(
                     children: [
-                      // No
-                      // pdfw.Padding(
-                      //   padding: const pdfw.EdgeInsets.all(20),
-                      //   child: pdfw.Text("No ${index + 1}",
-                      //       style: const pdfw.TextStyle(
-                      //         fontSize: 10,
-                      //       ),
-                      //       textAlign: pdfw.TextAlign.center),
-                      // ),
-                      // Kode Barang
-                      // pdfw.Padding(
-                      //   padding: const pdfw.EdgeInsets.all(20),
-                      //   child: pdfw.Text(product.code!,
-                      //       style: const pdfw.TextStyle(
-                      //         fontSize: 10,
-                      //       ),
-                      //       textAlign: pdfw.TextAlign.center),
-                      // ),
-                      // Nama Barang
                       pdfw.Padding(
                         padding: const pdfw.EdgeInsets.all(20),
                         child: pdfw.Text(product.name!,
@@ -155,16 +142,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                             ),
                             textAlign: pdfw.TextAlign.center),
                       ),
-                      // Qty
-                      // pdfw.Padding(
-                      //   padding: const pdfw.EdgeInsets.all(20),
-                      //   child: pdfw.Text("${product.qty}",
-                      //       style: const pdfw.TextStyle(
-                      //         fontSize: 10,
-                      //       ),
-                      //       textAlign: pdfw.TextAlign.center),
-                      // ),
-                      // QR Code
                       pdfw.Padding(
                           padding: const pdfw.EdgeInsets.all(20),
                           child: pdfw.BarcodeWidget(
@@ -191,28 +168,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                   children: [
                     pdfw.TableRow(
                       children: [
-                        // No
-                        // pdfw.Padding(
-                        //   padding: const pdfw.EdgeInsets.all(20),
-                        //   child: pdfw.Text("No",
-                        //       style: pdfw.TextStyle(
-                        //         fontSize: 10,
-                        //         fontWeight: pdfw.FontWeight.bold,
-                        //       ),
-                        //       textAlign: pdfw.TextAlign.center),
-                        // ),
-
-                        // // Kode Barang
-                        // pdfw.Padding(
-                        //   padding: const pdfw.EdgeInsets.all(20),
-                        //   child: pdfw.Text("Product Code",
-                        //       style: pdfw.TextStyle(
-                        //         fontSize: 10,
-                        //         fontWeight: pdfw.FontWeight.bold,
-                        //       ),
-                        //       textAlign: pdfw.TextAlign.center),
-                        // ),
-                        // Nama Barang
                         pdfw.Padding(
                           padding: const pdfw.EdgeInsets.all(20),
                           child: pdfw.Text("Product Name",
@@ -222,17 +177,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                               ),
                               textAlign: pdfw.TextAlign.center),
                         ),
-                        // Qty
-                        // pdfw.Padding(
-                        //   padding: const pdfw.EdgeInsets.all(20),
-                        //   child: pdfw.Text("Quantity",
-                        //       style: pdfw.TextStyle(
-                        //         fontSize: 10,
-                        //         fontWeight: pdfw.FontWeight.bold,
-                        //       ),
-                        //       textAlign: pdfw.TextAlign.center),
-                        // ),
-                        // QR Code
                         pdfw.Padding(
                           padding: const pdfw.EdgeInsets.all(20),
                           child: pdfw.Text("QR Code",
@@ -244,7 +188,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
                         ),
                       ],
                     ),
-                    // Isi Data
                     ...allData
                   ],
                 ),
@@ -253,13 +196,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ),
         );
 
-        // 3. open pdf
-
         Uint8List bytes = await pdf.save();
         final dir = await getApplicationCacheDirectory();
         File file = File("${dir.path}/myproducts.pdf");
 
-        // masukan data variabel bytes ke file pdf
         await file.writeAsBytes(bytes);
 
         await OpenFile.open(file.path);

@@ -93,12 +93,7 @@ class HomePageState extends State<HomePage> {
 
                   String barcode = await FlutterBarcodeScanner.scanBarcode(
                     "#000000", "CANCEL", true, ScanMode.QR);
-  // if (!mounted) return;
-//                   // setState(() {
-//                   //   ScaffoldMessenger.of(context)
-//                   //       .showSnackBar(SnackBar(content: Text(barcode)));
-//                   //   context.goNamed(Routes.products);
-//                   // });
+
                   if (barcode.isNotEmpty) {
                     try {
                       var firestore = FirebaseFirestore.instance;
