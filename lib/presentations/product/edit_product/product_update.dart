@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_scanqr/bloc/product/product_bloc.dart';
-import 'package:flutter_scanqr/models/product_model.dart';
+import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
+import 'package:flutter_scanqr/data/models/response/product_model.dart';
+import 'package:flutter_scanqr/data/models/response/product_response_model.dart';
 import 'package:flutter_scanqr/routes/router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class UpdateProductPage extends StatelessWidget {
-  UpdateProductPage(this.id, this.product, {super.key});
+  UpdateProductPage(this.id, this.produk, {super.key});
 
   final String id;
 
-  final ProductModel product;
+  final Produk produk;
 
   final TextEditingController codeController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -29,20 +30,20 @@ class UpdateProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    codeController.text = product.code!;
-    nameController.text = product.name!;
-    qtyController.text = product.qty!.toString();
-    skuController.text = product.sku!;
-    snController.text = product.sn!;
-    lisensiController.text = product.lisensi!;
-    lisensi2Controller.text = product.lisensi2!;
-    orderController.text = product.order!;
-    receiptController.text = product.receipt!;
-    expiredController.text = product.expired!;
-    posisiController.text = product.posisi!;
-    statusController.text = product.status!;
-    keteranganController.text = product.keterangan!;
-    divisiController.text = product.divisi!;
+    codeController.text = produk.kodeProduk;
+    nameController.text = produk.namaProduk;
+    qtyController.text = produk.jumlahProduk.toString();
+    skuController.text = produk.sku;
+    snController.text = produk.sn;
+    lisensiController.text = produk.lisensi1;
+    lisensi2Controller.text = produk.lisensi2;
+    orderController.text = produk.tanggalOrder;
+    receiptController.text = produk.tanggalExpired;
+    expiredController.text = produk.tanggalTerima;
+    posisiController.text = produk.posisi;
+    statusController.text = produk.status;
+    keteranganController.text = produk.keterangan;
+    divisiController.text = produk.divisi;
 
     return SafeArea(
       child: Scaffold(
@@ -64,7 +65,7 @@ class UpdateProductPage extends StatelessWidget {
                     height: 200,
                     width: 200,
                     child: QrImageView(
-                      data: product.code!,
+                      data: produk.kodeProduk,
                       size: 200,
                       version: QrVersions.auto,
                     ),
@@ -212,8 +213,8 @@ class UpdateProductPage extends StatelessWidget {
                   context.read<ProductBloc>().add(
                         EditProduct(
                           name: nameController.text,
-                          productId: product.productId!,
-                          qty: int.tryParse(qtyController.text) ?? 0,
+                          productId: produk.idProduk.toString(),
+                          qty: int.tryParse(qtyController.text),
                           code: codeController.text,
                           sku: skuController.text,
                           sn: snController.text,
@@ -261,9 +262,9 @@ class UpdateProductPage extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () {
-                    context
-                        .read<ProductBloc>()
-                        .add(DeleteProduct(product.productId!));
+                    // context
+                    //     .read<ProductBloc>()
+                    //     .add(DeleteProduct(product.productId!));
                   },
                   child: BlocConsumer<ProductBloc, ProductState>(
                     listener: (context, state) {

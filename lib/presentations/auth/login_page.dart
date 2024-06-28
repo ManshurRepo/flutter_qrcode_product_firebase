@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_scanqr/bloc/auth/auth_bloc.dart';
+import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
 import 'package:flutter_scanqr/routes/router.dart';
 
 

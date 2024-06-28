@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_scanqr/bloc/auth/auth_bloc.dart';
-import 'package:flutter_scanqr/bloc/product/product_bloc.dart';
+import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
+import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
 import 'firebase_options.dart';
+import 'presentations/product/detail_product/bloc/produk_bloc.dart';
 import 'routes/router.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProductBloc(),
+        ),
+
+        BlocProvider(
+          create: (context) => ProdukBloc(),
         ),
       ],
       child: MaterialApp.router(

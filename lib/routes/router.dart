@@ -1,13 +1,14 @@
-import 'package:flutter_scanqr/models/product_model.dart';
-import 'package:flutter_scanqr/pages/product_update.dart';
-import 'package:flutter_scanqr/pages/products_page.dart';
+import 'package:flutter_scanqr/data/models/response/product_model.dart';
+import 'package:flutter_scanqr/data/models/response/product_response_model.dart';
+import 'package:flutter_scanqr/presentations/product/edit_product/product_update.dart';
+import 'package:flutter_scanqr/presentations/product/detail_product/products_page.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import '../pages/add_product_page.dart';
-import '../pages/error_page.dart';
-import '../pages/home_page.dart';
-import '../pages/login_page.dart';
+import '../presentations/product/add_product/add_product_page.dart';
+import '../presentations/error/error_page.dart';
+import '../presentations/home/home_page.dart';
+import '../presentations/auth/login_page.dart';
 
 export 'package:go_router/go_router.dart';
 
@@ -39,7 +40,7 @@ final router = GoRouter(
               name: Routes.updateProduct,
               builder: (context, state) => UpdateProductPage(
                 state.pathParameters['productId'].toString(),
-                state.extra as ProductModel
+                state.extra as Produk
               ),
             )
           ],

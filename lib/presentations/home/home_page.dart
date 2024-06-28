@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_scanqr/bloc/auth/auth_bloc.dart';
-import 'package:flutter_scanqr/bloc/product/product_bloc.dart';
-import 'package:flutter_scanqr/models/product_model.dart';
-import 'package:flutter_scanqr/routes/router.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
+import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
+import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
+import 'package:flutter_scanqr/routes/router.dart';
 
-import 'product_update.dart';
+import '../../data/models/response/product_response_model.dart';
+import '../product/edit_product/product_update.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -92,36 +92,61 @@ class HomePageState extends State<HomePage> {
                   if (!_isMounted) return;
 
                   String barcode = await FlutterBarcodeScanner.scanBarcode(
-                    "#000000", "CANCEL", true, ScanMode.QR);
+                      "#000000", "CANCEL", true, ScanMode.QR);
 
-                  if (barcode.isNotEmpty) {
+                  if (barcode != "-1") { // Cek apakah barcode bukan nilai default saat dibatalkan
                     try {
-                      var firestore = FirebaseFirestore.instance;
-                      var snapshot = await firestore.collection("products").where("code", isEqualTo: barcode).get();
-                      
+                      var productRemoteDatasource = ProductRemoteDatasource();
+                      var result = await productRemoteDatasource.getProducts();
+
                       if (!_isMounted) return;
 
-                      if (snapshot.docs.isEmpty) {
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Produk dengan kode $barcode tidak ditemukan")),
-                        );
-                      } else {
-                        var productData = snapshot.docs.first.data();
-                        ProductModel product = ProductModel.fromJson(productData);
+                      result.fold(
+                        (error) {
+                          if (!_isMounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("Error: $error")),
+                          );
+                        },
+                        (productResponse) {
+                          var products = productResponse.data;
+                          var matchedProduct = products.firstWhere(
+                            (product) => product.kodeProduk == barcode,
+                            orElse: () => Produk(
+                              idProduk: -1, // Nilai dummy
+                              namaProduk: "",
+                              kodeProduk: "",
+                              jumlahProduk: 0,
+                              sku: "",
+                              sn: "",
+                              lisensi1: "",
+                              lisensi2: "",
+                              divisi: "",
+                              keterangan: "",
+                              tanggalOrder: "",
+                              tanggalTerima: "",
+                              tanggalExpired: "",
+                              posisi: "",
+                              status: "",
+                            ),
+                          );
 
-                        Navigator.push(
-                          // ignore: use_build_context_synchronously
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UpdateProductPage(product.productId!, product),
-                          ),
-                        );
-                      }
+                          if (matchedProduct.idProduk == -1) { // Memeriksa apakah produk ditemukan atau tidak
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Produk dengan kode $barcode tidak ditemukan")),
+                            );
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UpdateProductPage(matchedProduct.idProduk.toString(), matchedProduct),
+                              ),
+                            );
+                          }
+                        },
+                      );
                     } catch (e) {
                       if (!_isMounted) return;
-
-                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("Error: $e")),
                       );
