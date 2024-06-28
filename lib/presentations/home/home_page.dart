@@ -133,7 +133,7 @@ class HomePageState extends State<HomePage> {
 
                           if (matchedProduct.idProduk == -1) { // Memeriksa apakah produk ditemukan atau tidak
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Produk dengan kode $barcode tidak ditemukan")),
+                              SnackBar(content: Text("Produk dengan kode $barcode ini tidak ditemukan")),
                             );
                           } else {
                             Navigator.push(
