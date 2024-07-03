@@ -1,3 +1,3 @@
 class Variables {
- static const String baseUrl = 'https://b610-114-122-116-34.ngrok-free.app';
+ static const String baseUrl = 'https://3055-114-122-108-236.ngrok-free.app';
 }

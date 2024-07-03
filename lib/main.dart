@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
 import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
+import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
+import 'package:flutter_scanqr/presentations/product/add_product/bloc/add_produk_bloc.dart';
 import 'firebase_options.dart';
 import 'presentations/product/detail_product/bloc/produk_bloc.dart';
 import 'routes/router.dart';
@@ -32,6 +34,9 @@ class MyApp extends StatelessWidget {
 
         BlocProvider(
           create: (context) => ProdukBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AddProdukBloc(ProductRemoteDatasource()),
         ),
       ],
       child: MaterialApp.router(

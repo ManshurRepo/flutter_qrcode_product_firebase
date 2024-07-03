@@ -6,6 +6,10 @@ import 'package:flutter_scanqr/data/models/response/product_response_model.dart'
 import 'package:flutter_scanqr/routes/router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../../data/datasources/product_remote_datasource.dart';
+import '../../../data/models/request/edit_product_request_model.dart';
+import '../../../data/models/request/product_request_model.dart';
+
 class UpdateProductPage extends StatelessWidget {
   UpdateProductPage(this.id, this.produk, {super.key});
 
@@ -14,6 +18,7 @@ class UpdateProductPage extends StatelessWidget {
   final Produk produk;
 
   final TextEditingController codeController = TextEditingController();
+  final TextEditingController idController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController qtyController = TextEditingController();
   final TextEditingController skuController = TextEditingController();
@@ -76,8 +81,7 @@ class UpdateProductPage extends StatelessWidget {
               TextField(
                 autocorrect: false,
                 controller: codeController,
-                keyboardType: TextInputType.number,
-                // readOnly: true,
+               
                 maxLength: 10,
                 decoration: InputDecoration(
                     label: const Text("Kode Produk"),
@@ -209,87 +213,133 @@ class UpdateProductPage extends StatelessWidget {
               ),
               const SizedBox(height: 35),
               ElevatedButton(
-                onPressed: () {
-                  context.read<ProductBloc>().add(
-                        EditProduct(
-                          name: nameController.text,
-                          productId: produk.idProduk.toString(),
-                          qty: int.tryParse(qtyController.text),
-                          code: codeController.text,
-                          sku: skuController.text,
-                          sn: snController.text,
-                          divisi: divisiController.text,
-                          keterangan: keteranganController.text,
-                          lisensi2: lisensi2Controller.text,
-                          lisensi: lisensiController.text,
-                          posisi: posisiController.text,
-                          status: statusController.text,
-                          expired: expiredController.text,
-                          order: orderController.text,
-                          receipt: receiptController.text,
-                        ),
-                      );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  backgroundColor: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: BlocConsumer<ProductBloc, ProductState>(
-                  listener: (context, state) {
-                    if (state is StateError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                        ),
-                      );
-                    }
-                    if (state is StateSuccessEdit) {
-                      context.pop();
-                    }
-                  },
-                  builder: (context, state) {
-                    return Text(
-                      state is StateLoadingEdit
-                          ? "Loading..."
-                          : 'Update Product',
-                      style: const TextStyle(color: Colors.white),
-                    );
-                  },
-                ),
+              onPressed: () async {
+                final newModel = ProductRequestModel(
+                 
+                  namaProduk: nameController.text,
+                  kodeProduk: codeController.text,
+                  jumlahProduk: int.tryParse(qtyController.text)!,
+                  sku: skuController.text,
+                  sn: snController.text,
+                  lisensi1: lisensiController.text,
+                  lisensi2: lisensi2Controller.text,
+                  divisi: divisiController.text,
+                  keterangan: keteranganController.text,
+                  tanggalOrder: orderController.text,
+                  tanggalTerima: receiptController.text,
+                  tanggalExpired: expiredController.text,
+                  posisi: posisiController.text,
+                  status: statusController.text,
+                );
+               
+
+                try {
+                  await ProductRemoteDatasource()
+                      .updateProduk(produk.idProduk, newModel);
+                  Navigator.pop(context);
+                 
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          'Failed to edit task: $e'), 
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                }
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.yellow),
+              child: const Text(
+                'Save',
+                style: TextStyle(color: Colors.black),
               ),
-              TextButton(
-                  onPressed: () {
-                    // context
-                    //     .read<ProductBloc>()
-                    //     .add(DeleteProduct(product.productId!));
-                  },
-                  child: BlocConsumer<ProductBloc, ProductState>(
-                    listener: (context, state) {
-                      if (state is StateError) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(state.message),
-                          ),
-                        );
-                      }
-                      if (state is StateSuccessDelete) {
-                        context.pop();
-                      }
-                    },
-                    builder: (context, state) {
-                      return Text(
-                        state is StateLoadingDelete
-                            ? "Loading..."
-                            : 'Delete Product',
-                        style: const TextStyle(color: Colors.red),
-                      );
-                    },
-                  ))
-            ],
-          )),
+            ),
+          ],
+        ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     context.read<ProductBloc>().add(
+              //           EditProduct(
+              //             name: nameController.text,
+              //             productId: produk.idProduk.toString(),
+              //             qty: int.tryParse(qtyController.text),
+              //             code: codeController.text,
+              //             sku: skuController.text,
+              //             sn: snController.text,
+              //             divisi: divisiController.text,
+              //             keterangan: keteranganController.text,
+              //             lisensi2: lisensi2Controller.text,
+              //             lisensi: lisensiController.text,
+              //             posisi: posisiController.text,
+              //             status: statusController.text,
+              //             expired: expiredController.text,
+              //             order: orderController.text,
+              //             receipt: receiptController.text,
+              //           ),
+              //         );
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     padding: const EdgeInsets.symmetric(vertical: 20),
+              //     backgroundColor: Colors.blue,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(10),
+              //     ),
+              //   ),
+              //   child: BlocConsumer<ProductBloc, ProductState>(
+              //     listener: (context, state) {
+              //       if (state is StateError) {
+              //         ScaffoldMessenger.of(context).showSnackBar(
+              //           SnackBar(
+              //             content: Text(state.message),
+              //           ),
+              //         );
+              //       }
+              //       if (state is StateSuccessEdit) {
+              //         context.pop();
+              //       }
+              //     },
+              //     builder: (context, state) {
+              //       return Text(
+              //         state is StateLoadingEdit
+              //             ? "Loading..."
+              //             : 'Update Product',
+              //         style: const TextStyle(color: Colors.white),
+              //       );
+              //     },
+              //   ),
+              // ),
+              // TextButton(
+              //     onPressed: () {
+              //       // context
+              //       //     .read<ProductBloc>()
+              //       //     .add(DeleteProduct(product.productId!));
+              //     },
+              //     child: BlocConsumer<ProductBloc, ProductState>(
+              //       listener: (context, state) {
+              //         if (state is StateError) {
+              //           ScaffoldMessenger.of(context).showSnackBar(
+              //             SnackBar(
+              //               content: Text(state.message),
+              //             ),
+              //           );
+              //         }
+              //         if (state is StateSuccessDelete) {
+              //           context.pop();
+              //         }
+              //       },
+              //       builder: (context, state) {
+              //         return Text(
+              //           state is StateLoadingDelete
+              //               ? "Loading..."
+              //               : 'Delete Product',
+              //           style: const TextStyle(color: Colors.red),
+              //         );
+              //       },
+              //     ))
+            // ],
+          // ));
+      ),
     );
   }
 }
+
