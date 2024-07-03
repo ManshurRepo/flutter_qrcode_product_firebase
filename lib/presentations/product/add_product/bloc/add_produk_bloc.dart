@@ -7,6 +7,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_scanqr/data/models/request/product_request_model.dart';
 
+import '../../../../data/models/request/edit_product_request_model.dart';
+
 part 'add_produk_bloc.freezed.dart';
 part 'add_produk_event.dart';
 part 'add_produk_state.dart';
@@ -17,14 +19,28 @@ class AddProdukBloc extends Bloc<AddProdukEvent, AddProdukState> {
   AddProdukBloc(
     this.productRemoteDatasource,
   ) : super(const _Initial()) {
-    on<_AddProduk>((event, emit) async {
-      emit(const _Loading());
-      final result =
-          await productRemoteDatasource.createProduct(event.addProduk);
+    on<_AddProduk>(
+      (event, emit) async {
+        emit(const _Loading());
+        final result = await productRemoteDatasource.createProduct(event.addProduk);
 
-      result.fold((l) => emit(AddProdukState.error(l)), (r) {
-        emit(AddProdukState.loaded(r));
-      });
-    });
+        result.fold(
+          (l) => emit(AddProdukState.error(l)),
+          (r) => emit(AddProdukState.loaded(r)),
+        );
+      },
+    );
+
+    on<_EditProduk>(
+      (event, emit) async {
+        emit(const _Loading());
+        final result = await productRemoteDatasource.updateProduk(event.id, event.editProduk);
+
+        result.fold(
+          (l) => emit(AddProdukState.error(l)),
+          (r) => emit(AddProdukState.loaded(r)),
+        );
+      },
+    );
   }
 }

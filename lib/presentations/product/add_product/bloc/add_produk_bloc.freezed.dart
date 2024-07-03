@@ -20,18 +20,22 @@ mixin _$AddProdukEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(ProductRequestModel addProduk) addProduk,
+    required TResult Function(int id, EditProductRequestModel editProduk)
+        editProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
+    TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
+    TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +43,21 @@ mixin _$AddProdukEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
+    required TResult Function(_EditProduk value) editProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
+    TResult? Function(_EditProduk value)? editProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
+    TResult Function(_EditProduk value)? editProduk,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +121,8 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(ProductRequestModel addProduk) addProduk,
+    required TResult Function(int id, EditProductRequestModel editProduk)
+        editProduk,
   }) {
     return started();
   }
@@ -123,6 +132,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
+    TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
   }) {
     return started?.call();
   }
@@ -132,6 +142,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
+    TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -145,6 +156,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
+    required TResult Function(_EditProduk value) editProduk,
   }) {
     return started(this);
   }
@@ -154,6 +166,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
+    TResult? Function(_EditProduk value)? editProduk,
   }) {
     return started?.call(this);
   }
@@ -163,6 +176,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
+    TResult Function(_EditProduk value)? editProduk,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -243,6 +257,8 @@ class _$AddProdukImpl implements _AddProduk {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(ProductRequestModel addProduk) addProduk,
+    required TResult Function(int id, EditProductRequestModel editProduk)
+        editProduk,
   }) {
     return addProduk(this.addProduk);
   }
@@ -252,6 +268,7 @@ class _$AddProdukImpl implements _AddProduk {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
+    TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
   }) {
     return addProduk?.call(this.addProduk);
   }
@@ -261,6 +278,7 @@ class _$AddProdukImpl implements _AddProduk {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
+    TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
     required TResult orElse(),
   }) {
     if (addProduk != null) {
@@ -274,6 +292,7 @@ class _$AddProdukImpl implements _AddProduk {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
+    required TResult Function(_EditProduk value) editProduk,
   }) {
     return addProduk(this);
   }
@@ -283,6 +302,7 @@ class _$AddProdukImpl implements _AddProduk {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
+    TResult? Function(_EditProduk value)? editProduk,
   }) {
     return addProduk?.call(this);
   }
@@ -292,6 +312,7 @@ class _$AddProdukImpl implements _AddProduk {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
+    TResult Function(_EditProduk value)? editProduk,
     required TResult orElse(),
   }) {
     if (addProduk != null) {
@@ -308,6 +329,159 @@ abstract class _AddProduk implements AddProdukEvent {
   ProductRequestModel get addProduk;
   @JsonKey(ignore: true)
   _$$AddProdukImplCopyWith<_$AddProdukImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EditProdukImplCopyWith<$Res> {
+  factory _$$EditProdukImplCopyWith(
+          _$EditProdukImpl value, $Res Function(_$EditProdukImpl) then) =
+      __$$EditProdukImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id, EditProductRequestModel editProduk});
+}
+
+/// @nodoc
+class __$$EditProdukImplCopyWithImpl<$Res>
+    extends _$AddProdukEventCopyWithImpl<$Res, _$EditProdukImpl>
+    implements _$$EditProdukImplCopyWith<$Res> {
+  __$$EditProdukImplCopyWithImpl(
+      _$EditProdukImpl _value, $Res Function(_$EditProdukImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? editProduk = freezed,
+  }) {
+    return _then(_$EditProdukImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      freezed == editProduk
+          ? _value.editProduk
+          : editProduk // ignore: cast_nullable_to_non_nullable
+              as EditProductRequestModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditProdukImpl implements _EditProduk {
+  const _$EditProdukImpl(this.id, this.editProduk);
+
+  @override
+  final int id;
+  @override
+  final EditProductRequestModel editProduk;
+
+  @override
+  String toString() {
+    return 'AddProdukEvent.editProduk(id: $id, editProduk: $editProduk)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditProdukImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            const DeepCollectionEquality()
+                .equals(other.editProduk, editProduk));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, const DeepCollectionEquality().hash(editProduk));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditProdukImplCopyWith<_$EditProdukImpl> get copyWith =>
+      __$$EditProdukImplCopyWithImpl<_$EditProdukImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ProductRequestModel addProduk) addProduk,
+    required TResult Function(int id, EditProductRequestModel editProduk)
+        editProduk,
+  }) {
+    return editProduk(id, this.editProduk);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ProductRequestModel addProduk)? addProduk,
+    TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
+  }) {
+    return editProduk?.call(id, this.editProduk);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ProductRequestModel addProduk)? addProduk,
+    TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
+    required TResult orElse(),
+  }) {
+    if (editProduk != null) {
+      return editProduk(id, this.editProduk);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_AddProduk value) addProduk,
+    required TResult Function(_EditProduk value) editProduk,
+  }) {
+    return editProduk(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_AddProduk value)? addProduk,
+    TResult? Function(_EditProduk value)? editProduk,
+  }) {
+    return editProduk?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_AddProduk value)? addProduk,
+    TResult Function(_EditProduk value)? editProduk,
+    required TResult orElse(),
+  }) {
+    if (editProduk != null) {
+      return editProduk(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EditProduk implements AddProdukEvent {
+  const factory _EditProduk(
+          final int id, final EditProductRequestModel editProduk) =
+      _$EditProdukImpl;
+
+  int get id;
+  EditProductRequestModel get editProduk;
+  @JsonKey(ignore: true)
+  _$$EditProdukImplCopyWith<_$EditProdukImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

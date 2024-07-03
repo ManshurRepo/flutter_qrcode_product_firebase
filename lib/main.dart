@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
 import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
 import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
+import 'package:flutter_scanqr/firebase_options.dart';
+import 'package:flutter_scanqr/presentations/auth/login_page.dart';
 import 'package:flutter_scanqr/presentations/product/add_product/bloc/add_produk_bloc.dart';
-import 'firebase_options.dart';
-import 'presentations/product/detail_product/bloc/produk_bloc.dart';
-import 'routes/router.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_scanqr/presentations/product/detail_product/bloc/produk_bloc.dart';
+
+import 'presentations/home/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ProductBloc(),
         ),
-
         BlocProvider(
           create: (context) => ProdukBloc(),
         ),
@@ -39,12 +39,15 @@ class MyApp extends StatelessWidget {
           create: (context) => AddProdukBloc(ProductRemoteDatasource()),
         ),
       ],
-      child: MaterialApp.router(
-        routerConfig: router,
-        debugShowCheckedModeBanner: false,
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: LoginPage(), // Halaman utama aplikasi
+    
       ),
     );
   }
 }
-
-

@@ -45,7 +45,7 @@ class ProductRemoteDatasource {
   }
 
   Future<Either<String, AddProductResponseModel>> updateProduk( int id,
-      ProductRequestModel data) async {
+      EditProductRequestModel data) async {
     final response = await http.put(
       Uri.parse('${Variables.baseUrl}/api/produk/$id'),
       body: data.toJson(), // Encode data as JSON

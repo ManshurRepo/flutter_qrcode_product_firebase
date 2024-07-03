@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
-import 'package:flutter_scanqr/routes/router.dart';
+import 'package:flutter_scanqr/presentations/home/home_page.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -58,9 +58,10 @@ class LoginPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
               child: BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
-                  if (state is AuthStateLogin) {
-                    context.goNamed(Routes.home);
-                  }
+                  Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
                   if (state is AuthStateError) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
