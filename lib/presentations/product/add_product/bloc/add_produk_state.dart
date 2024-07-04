@@ -4,7 +4,11 @@ part of 'add_produk_bloc.dart';
 class AddProdukState with _$AddProdukState {
 const factory AddProdukState.initial() = _Initial;
 const factory AddProdukState.loading() = _Loading;
+const factory AddProdukState.deleteLoading() = _DeleteLoading;
+
 const factory AddProdukState.loaded(AddProductResponseModel model) = _Loaded;
+const factory AddProdukState.deleteLoaded(AddProductResponseModel model) = _DeleteLoaded;
+
 const factory AddProdukState.error(String message) = _Error;
 
 }

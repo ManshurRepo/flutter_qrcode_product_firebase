@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'dart:convert';
 
 class EditProductRequestModel {
-     int idProduk;
+    final int idProduk;
     final String namaProduk;
     final String kodeProduk;
     final int jumlahProduk;

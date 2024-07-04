@@ -22,6 +22,7 @@ mixin _$AddProdukEvent {
     required TResult Function(ProductRequestModel addProduk) addProduk,
     required TResult Function(int id, EditProductRequestModel editProduk)
         editProduk,
+    required TResult Function(int id) deleteProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +30,7 @@ mixin _$AddProdukEvent {
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
     TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult? Function(int id)? deleteProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$AddProdukEvent {
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
     TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult Function(int id)? deleteProduk,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +47,7 @@ mixin _$AddProdukEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
     required TResult Function(_EditProduk value) editProduk,
+    required TResult Function(_DeleteProduk value) deleteProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +55,7 @@ mixin _$AddProdukEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
     TResult? Function(_EditProduk value)? editProduk,
+    TResult? Function(_DeleteProduk value)? deleteProduk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +63,7 @@ mixin _$AddProdukEvent {
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
     TResult Function(_EditProduk value)? editProduk,
+    TResult Function(_DeleteProduk value)? deleteProduk,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,6 +129,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(ProductRequestModel addProduk) addProduk,
     required TResult Function(int id, EditProductRequestModel editProduk)
         editProduk,
+    required TResult Function(int id) deleteProduk,
   }) {
     return started();
   }
@@ -133,6 +140,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
     TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult? Function(int id)? deleteProduk,
   }) {
     return started?.call();
   }
@@ -143,6 +151,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
     TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult Function(int id)? deleteProduk,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -157,6 +166,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
     required TResult Function(_EditProduk value) editProduk,
+    required TResult Function(_DeleteProduk value) deleteProduk,
   }) {
     return started(this);
   }
@@ -167,6 +177,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
     TResult? Function(_EditProduk value)? editProduk,
+    TResult? Function(_DeleteProduk value)? deleteProduk,
   }) {
     return started?.call(this);
   }
@@ -177,6 +188,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
     TResult Function(_EditProduk value)? editProduk,
+    TResult Function(_DeleteProduk value)? deleteProduk,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -259,6 +271,7 @@ class _$AddProdukImpl implements _AddProduk {
     required TResult Function(ProductRequestModel addProduk) addProduk,
     required TResult Function(int id, EditProductRequestModel editProduk)
         editProduk,
+    required TResult Function(int id) deleteProduk,
   }) {
     return addProduk(this.addProduk);
   }
@@ -269,6 +282,7 @@ class _$AddProdukImpl implements _AddProduk {
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
     TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult? Function(int id)? deleteProduk,
   }) {
     return addProduk?.call(this.addProduk);
   }
@@ -279,6 +293,7 @@ class _$AddProdukImpl implements _AddProduk {
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
     TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult Function(int id)? deleteProduk,
     required TResult orElse(),
   }) {
     if (addProduk != null) {
@@ -293,6 +308,7 @@ class _$AddProdukImpl implements _AddProduk {
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
     required TResult Function(_EditProduk value) editProduk,
+    required TResult Function(_DeleteProduk value) deleteProduk,
   }) {
     return addProduk(this);
   }
@@ -303,6 +319,7 @@ class _$AddProdukImpl implements _AddProduk {
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
     TResult? Function(_EditProduk value)? editProduk,
+    TResult? Function(_DeleteProduk value)? deleteProduk,
   }) {
     return addProduk?.call(this);
   }
@@ -313,6 +330,7 @@ class _$AddProdukImpl implements _AddProduk {
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
     TResult Function(_EditProduk value)? editProduk,
+    TResult Function(_DeleteProduk value)? deleteProduk,
     required TResult orElse(),
   }) {
     if (addProduk != null) {
@@ -353,14 +371,14 @@ class __$$EditProdukImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? editProduk = freezed,
+    Object? editProduk = null,
   }) {
     return _then(_$EditProdukImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      freezed == editProduk
+      null == editProduk
           ? _value.editProduk
           : editProduk // ignore: cast_nullable_to_non_nullable
               as EditProductRequestModel,
@@ -389,13 +407,12 @@ class _$EditProdukImpl implements _EditProduk {
         (other.runtimeType == runtimeType &&
             other is _$EditProdukImpl &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality()
-                .equals(other.editProduk, editProduk));
+            (identical(other.editProduk, editProduk) ||
+                other.editProduk == editProduk));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, const DeepCollectionEquality().hash(editProduk));
+  int get hashCode => Object.hash(runtimeType, id, editProduk);
 
   @JsonKey(ignore: true)
   @override
@@ -410,6 +427,7 @@ class _$EditProdukImpl implements _EditProduk {
     required TResult Function(ProductRequestModel addProduk) addProduk,
     required TResult Function(int id, EditProductRequestModel editProduk)
         editProduk,
+    required TResult Function(int id) deleteProduk,
   }) {
     return editProduk(id, this.editProduk);
   }
@@ -420,6 +438,7 @@ class _$EditProdukImpl implements _EditProduk {
     TResult? Function()? started,
     TResult? Function(ProductRequestModel addProduk)? addProduk,
     TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult? Function(int id)? deleteProduk,
   }) {
     return editProduk?.call(id, this.editProduk);
   }
@@ -430,6 +449,7 @@ class _$EditProdukImpl implements _EditProduk {
     TResult Function()? started,
     TResult Function(ProductRequestModel addProduk)? addProduk,
     TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult Function(int id)? deleteProduk,
     required TResult orElse(),
   }) {
     if (editProduk != null) {
@@ -444,6 +464,7 @@ class _$EditProdukImpl implements _EditProduk {
     required TResult Function(_Started value) started,
     required TResult Function(_AddProduk value) addProduk,
     required TResult Function(_EditProduk value) editProduk,
+    required TResult Function(_DeleteProduk value) deleteProduk,
   }) {
     return editProduk(this);
   }
@@ -454,6 +475,7 @@ class _$EditProdukImpl implements _EditProduk {
     TResult? Function(_Started value)? started,
     TResult? Function(_AddProduk value)? addProduk,
     TResult? Function(_EditProduk value)? editProduk,
+    TResult? Function(_DeleteProduk value)? deleteProduk,
   }) {
     return editProduk?.call(this);
   }
@@ -464,6 +486,7 @@ class _$EditProdukImpl implements _EditProduk {
     TResult Function(_Started value)? started,
     TResult Function(_AddProduk value)? addProduk,
     TResult Function(_EditProduk value)? editProduk,
+    TResult Function(_DeleteProduk value)? deleteProduk,
     required TResult orElse(),
   }) {
     if (editProduk != null) {
@@ -486,12 +509,160 @@ abstract class _EditProduk implements AddProdukEvent {
 }
 
 /// @nodoc
+abstract class _$$DeleteProdukImplCopyWith<$Res> {
+  factory _$$DeleteProdukImplCopyWith(
+          _$DeleteProdukImpl value, $Res Function(_$DeleteProdukImpl) then) =
+      __$$DeleteProdukImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$DeleteProdukImplCopyWithImpl<$Res>
+    extends _$AddProdukEventCopyWithImpl<$Res, _$DeleteProdukImpl>
+    implements _$$DeleteProdukImplCopyWith<$Res> {
+  __$$DeleteProdukImplCopyWithImpl(
+      _$DeleteProdukImpl _value, $Res Function(_$DeleteProdukImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$DeleteProdukImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteProdukImpl implements _DeleteProduk {
+  const _$DeleteProdukImpl(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'AddProdukEvent.deleteProduk(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteProdukImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteProdukImplCopyWith<_$DeleteProdukImpl> get copyWith =>
+      __$$DeleteProdukImplCopyWithImpl<_$DeleteProdukImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(ProductRequestModel addProduk) addProduk,
+    required TResult Function(int id, EditProductRequestModel editProduk)
+        editProduk,
+    required TResult Function(int id) deleteProduk,
+  }) {
+    return deleteProduk(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(ProductRequestModel addProduk)? addProduk,
+    TResult? Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult? Function(int id)? deleteProduk,
+  }) {
+    return deleteProduk?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(ProductRequestModel addProduk)? addProduk,
+    TResult Function(int id, EditProductRequestModel editProduk)? editProduk,
+    TResult Function(int id)? deleteProduk,
+    required TResult orElse(),
+  }) {
+    if (deleteProduk != null) {
+      return deleteProduk(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_AddProduk value) addProduk,
+    required TResult Function(_EditProduk value) editProduk,
+    required TResult Function(_DeleteProduk value) deleteProduk,
+  }) {
+    return deleteProduk(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_AddProduk value)? addProduk,
+    TResult? Function(_EditProduk value)? editProduk,
+    TResult? Function(_DeleteProduk value)? deleteProduk,
+  }) {
+    return deleteProduk?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_AddProduk value)? addProduk,
+    TResult Function(_EditProduk value)? editProduk,
+    TResult Function(_DeleteProduk value)? deleteProduk,
+    required TResult orElse(),
+  }) {
+    if (deleteProduk != null) {
+      return deleteProduk(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteProduk implements AddProdukEvent {
+  const factory _DeleteProduk(final int id) = _$DeleteProdukImpl;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$DeleteProdukImplCopyWith<_$DeleteProdukImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AddProdukState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() deleteLoading,
     required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -499,7 +670,9 @@ mixin _$AddProdukState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
     TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -507,7 +680,9 @@ mixin _$AddProdukState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? deleteLoading,
     TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -516,7 +691,9 @@ mixin _$AddProdukState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -524,7 +701,9 @@ mixin _$AddProdukState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -532,7 +711,9 @@ mixin _$AddProdukState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -597,7 +778,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() deleteLoading,
     required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -608,7 +791,9 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
     TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -619,7 +804,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? deleteLoading,
     TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -634,7 +821,9 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -645,7 +834,9 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -656,7 +847,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -711,7 +904,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() deleteLoading,
     required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -722,7 +917,9 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
     TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -733,7 +930,9 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? deleteLoading,
     TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -748,7 +947,9 @@ class _$LoadingImpl implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -759,7 +960,9 @@ class _$LoadingImpl implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -770,7 +973,9 @@ class _$LoadingImpl implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -783,6 +988,132 @@ class _$LoadingImpl implements _Loading {
 
 abstract class _Loading implements AddProdukState {
   const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteLoadingImplCopyWith<$Res> {
+  factory _$$DeleteLoadingImplCopyWith(
+          _$DeleteLoadingImpl value, $Res Function(_$DeleteLoadingImpl) then) =
+      __$$DeleteLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteLoadingImplCopyWithImpl<$Res>
+    extends _$AddProdukStateCopyWithImpl<$Res, _$DeleteLoadingImpl>
+    implements _$$DeleteLoadingImplCopyWith<$Res> {
+  __$$DeleteLoadingImplCopyWithImpl(
+      _$DeleteLoadingImpl _value, $Res Function(_$DeleteLoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DeleteLoadingImpl implements _DeleteLoading {
+  const _$DeleteLoadingImpl();
+
+  @override
+  String toString() {
+    return 'AddProdukState.deleteLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DeleteLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() deleteLoading,
+    required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
+    required TResult Function(String message) error,
+  }) {
+    return deleteLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
+    TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
+    TResult? Function(String message)? error,
+  }) {
+    return deleteLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? deleteLoading,
+    TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (deleteLoading != null) {
+      return deleteLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return deleteLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return deleteLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (deleteLoading != null) {
+      return deleteLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteLoading implements AddProdukState {
+  const factory _DeleteLoading() = _$DeleteLoadingImpl;
 }
 
 /// @nodoc
@@ -851,7 +1182,9 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() deleteLoading,
     required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
     required TResult Function(String message) error,
   }) {
     return loaded(model);
@@ -862,7 +1195,9 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
     TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(model);
@@ -873,7 +1208,9 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? deleteLoading,
     TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -888,7 +1225,9 @@ class _$LoadedImpl implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -899,7 +1238,9 @@ class _$LoadedImpl implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -910,7 +1251,9 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -927,6 +1270,164 @@ abstract class _Loaded implements AddProdukState {
   AddProductResponseModel get model;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteLoadedImplCopyWith<$Res> {
+  factory _$$DeleteLoadedImplCopyWith(
+          _$DeleteLoadedImpl value, $Res Function(_$DeleteLoadedImpl) then) =
+      __$$DeleteLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AddProductResponseModel model});
+}
+
+/// @nodoc
+class __$$DeleteLoadedImplCopyWithImpl<$Res>
+    extends _$AddProdukStateCopyWithImpl<$Res, _$DeleteLoadedImpl>
+    implements _$$DeleteLoadedImplCopyWith<$Res> {
+  __$$DeleteLoadedImplCopyWithImpl(
+      _$DeleteLoadedImpl _value, $Res Function(_$DeleteLoadedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? model = null,
+  }) {
+    return _then(_$DeleteLoadedImpl(
+      null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as AddProductResponseModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteLoadedImpl implements _DeleteLoaded {
+  const _$DeleteLoadedImpl(this.model);
+
+  @override
+  final AddProductResponseModel model;
+
+  @override
+  String toString() {
+    return 'AddProdukState.deleteLoaded(model: $model)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteLoadedImpl &&
+            (identical(other.model, model) || other.model == model));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, model);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteLoadedImplCopyWith<_$DeleteLoadedImpl> get copyWith =>
+      __$$DeleteLoadedImplCopyWithImpl<_$DeleteLoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() deleteLoading,
+    required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
+    required TResult Function(String message) error,
+  }) {
+    return deleteLoaded(model);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
+    TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
+    TResult? Function(String message)? error,
+  }) {
+    return deleteLoaded?.call(model);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? deleteLoading,
+    TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (deleteLoaded != null) {
+      return deleteLoaded(model);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return deleteLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
+    TResult? Function(_Error value)? error,
+  }) {
+    return deleteLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (deleteLoaded != null) {
+      return deleteLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteLoaded implements AddProdukState {
+  const factory _DeleteLoaded(final AddProductResponseModel model) =
+      _$DeleteLoadedImpl;
+
+  AddProductResponseModel get model;
+  @JsonKey(ignore: true)
+  _$$DeleteLoadedImplCopyWith<_$DeleteLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -996,7 +1497,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() deleteLoading,
     required TResult Function(AddProductResponseModel model) loaded,
+    required TResult Function(AddProductResponseModel model) deleteLoaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -1007,7 +1510,9 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? deleteLoading,
     TResult? Function(AddProductResponseModel model)? loaded,
+    TResult? Function(AddProductResponseModel model)? deleteLoaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -1018,7 +1523,9 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? deleteLoading,
     TResult Function(AddProductResponseModel model)? loaded,
+    TResult Function(AddProductResponseModel model)? deleteLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -1033,7 +1540,9 @@ class _$ErrorImpl implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_DeleteLoading value) deleteLoading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DeleteLoaded value) deleteLoaded,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -1044,7 +1553,9 @@ class _$ErrorImpl implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_DeleteLoading value)? deleteLoading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_DeleteLoaded value)? deleteLoaded,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -1055,7 +1566,9 @@ class _$ErrorImpl implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_DeleteLoading value)? deleteLoading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DeleteLoaded value)? deleteLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

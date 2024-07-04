@@ -64,4 +64,22 @@ class ProductRemoteDatasource {
       return Left('Server Error');
     }
   }
+
+  Future<Either<String, AddProductResponseModel>> deleteProduk ( int id)
+      async {
+    final response = await http.delete(
+      Uri.parse('${Variables.baseUrl}/api/produk/$id'),
+   
+    );
+    print('Response status code: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    print('Response headers: ${response.headers}');
+
+    if (response.statusCode == 200) {
+      return Right(AddProductResponseModel.fromJson(response.body));
+    } else {
+      return Left('Server Error');
+    }
+  }
 }

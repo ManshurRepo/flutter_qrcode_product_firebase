@@ -42,5 +42,16 @@ class AddProdukBloc extends Bloc<AddProdukEvent, AddProdukState> {
         );
       },
     );
+     on<_DeleteProduk>(
+      (event, emit) async {
+        emit(const _DeleteLoading());
+        final result = await productRemoteDatasource.deleteProduk(event.id);
+
+        result.fold(
+          (l) => emit(AddProdukState.error(l)),
+          (r) => emit(AddProdukState.deleteLoaded(r)),
+        );
+      },
+    );
   }
 }
