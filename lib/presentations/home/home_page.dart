@@ -224,10 +224,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
 import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
+import 'package:flutter_scanqr/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
+import 'package:flutter_scanqr/presentations/auth/bloc/logout/logout_bloc.dart';
+import 'package:flutter_scanqr/presentations/auth/bloc/register/auth_bloc_bloc.dart';
 import 'package:flutter_scanqr/presentations/auth/login_page.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/models/response/product_response_model.dart';
 import '../product/add_product/add_product_page.dart';
@@ -235,7 +238,7 @@ import '../product/detail_product/products_page.dart';
 import '../product/edit_product/product_update.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();
@@ -260,28 +263,21 @@ class HomePageState extends State<HomePage> {
             'Home Page',
             style: TextStyle(color: Colors.white),
           ),
-          centerTitle: true,
           actions: [
-            BlocConsumer<AuthBloc, AuthState>(
-              listener: (context, state) {
-                if (state is AuthStateLogout) {
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: IconButton(
+                onPressed: () {
+                  context.read<LogoutBloc>().add(const LogoutEvent.logout());
+                  AuthLocalDatasource().removeAuthData();
                   Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
-                }
-              },
-              builder: (context, state) {
-                return IconButton(
-                  onPressed: () {
-                    context.read<AuthBloc>().add(AuthEventLogout());
-                  },
-                  icon: const Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ),
-                );
-              },
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                },
+                icon: const Icon(Icons.logout),
+                color: Colors.white,
+              ),
             )
           ],
         ),
@@ -315,7 +311,8 @@ class HomePageState extends State<HomePage> {
                 onTap = () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ProductsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const ProductsPage()),
                   );
                 };
                 break;
@@ -326,7 +323,7 @@ class HomePageState extends State<HomePage> {
                   if (!_isMounted) return;
 
                   String barcode = await FlutterBarcodeScanner.scanBarcode(
-                    "#000000", "CANCEL", true, ScanMode.QR);
+                      "#000000", "CANCEL", true, ScanMode.QR);
 
                   if (barcode != "-1") {
                     try {
@@ -368,7 +365,8 @@ class HomePageState extends State<HomePage> {
                           if (matchedProduct.idProduk == -1) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text("Produk dengan kode $barcode tidak ditemukan"),
+                                content: Text(
+                                    "Produk dengan kode $barcode tidak ditemukan"),
                               ),
                             );
                           } else {
@@ -446,4 +444,3 @@ class HomePageState extends State<HomePage> {
     );
   }
 }
-

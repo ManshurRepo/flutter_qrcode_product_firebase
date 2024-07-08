@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_scanqr/bloc_firebase/auth/auth_bloc.dart';
-import 'package:flutter_scanqr/presentations/home/home_page.dart';
-
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -48,54 +44,11 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 25),
             ElevatedButton(
-              onPressed: () {
-                // Dispatch AuthEventLogin with actual text values from controllers
-                context.read<AuthBloc>().add(AuthEventLogin(
-                      emailController.text,
-                      passwordController.text,
-                    ));
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-              child: BlocConsumer<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              );
-                  if (state is AuthStateError) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          state.message,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: Colors.red,
-                        duration: const Duration(seconds: 2),
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  if (state is AuthStateLoading) {
-                    return const Center(
-                      child: SizedBox(
-                        width: 22, // Atur lebar sesuai dengan keinginan Anda
-                        height: 22, // Atur tinggi sesuai dengan keinginan Anda
-                        child: CircularProgressIndicator(
-                          strokeWidth:
-                              3, // Atur lebar garis progress sesuai keinginan Anda
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return const Text(
-                      "Login",
-                      style: TextStyle(color: Colors.white),
-                    );
-                  }
-                },
+              child: Text(
+                "Login",
+                style: const TextStyle(color: Colors.white),
               ),
             )
           ],
