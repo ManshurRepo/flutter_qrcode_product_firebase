@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/data/models/request/product_request_model.dart';
 import 'package:flutter_scanqr/presentations/product/add_product/bloc/add_produk_bloc.dart';
@@ -253,8 +254,8 @@ class _AddProductPageState extends State<AddProductPage> {
                         backgroundColor: Colors.blue,
                       ),
                       child: const Text(
-                        'Submit',
-                        style: TextStyle(color: Colors.black),
+                        'Add Product',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     ),
                     loading: () {
@@ -272,5 +273,3 @@ class _AddProductPageState extends State<AddProductPage> {
     );
   }
 }
-
-

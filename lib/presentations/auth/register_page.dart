@@ -9,12 +9,9 @@ import 'package:flutter_scanqr/presentations/home/home_page.dart';
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
 
-  final TextEditingController usernameController =
-      TextEditingController(text: "admin");
-  final TextEditingController emailController =
-      TextEditingController(text: "admin@gmail.com");
-  final TextEditingController passwordController =
-      TextEditingController(text: "tesadmin_123");
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +31,7 @@ class RegisterPage extends StatelessWidget {
               autocorrect: false,
               controller: usernameController,
               decoration: InputDecoration(
+                labelText: "Username",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -44,6 +42,7 @@ class RegisterPage extends StatelessWidget {
               autocorrect: false,
               controller: emailController,
               decoration: InputDecoration(
+                labelText: "Email",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -55,6 +54,7 @@ class RegisterPage extends StatelessWidget {
               controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
+                labelText: "Password",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -116,7 +116,7 @@ class RegisterPage extends StatelessWidget {
                   } else {
                     return const Text(
                       "Register",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 20),
                     );
                   }
                 },

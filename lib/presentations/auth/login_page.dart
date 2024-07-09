@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_scanqr/data/models/request/login_request_model.dart';
+import 'package:flutter_scanqr/presentations/auth/bloc/bloc/login_bloc.dart';
+
+import '../../data/datasources/auth_local_datasource.dart';
+import '../home/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  final TextEditingController emailController =
-      TextEditingController(text: "admin@gmail.com");
-  final TextEditingController passwordController =
-      TextEditingController(text: "tesadmin_123");
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class LoginPage extends StatelessWidget {
               autocorrect: false,
               controller: emailController,
               decoration: InputDecoration(
+                labelText: "Email",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -37,6 +42,7 @@ class LoginPage extends StatelessWidget {
               controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
+                labelText: "Password",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -44,11 +50,62 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 25),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                final loginRequest = LoginRequestModel(
+                    email: emailController.text,
+                    password: passwordController.text);
+                context.read<LoginBloc>().add(LoginEvent.login(loginRequest));
+              },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-              child: Text(
-                "Login",
-                style: const TextStyle(color: Colors.white),
+              child: BlocConsumer<LoginBloc, LoginState>(
+                listener: (context, state) {
+                  state.maybeWhen(
+                    loaded: (state) {
+                      AuthLocalDatasource().saveAuthData(state);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Register Success!'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    },
+                    error: (message) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Register Error: $message'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    },
+                    orElse: () {},
+                  );
+                },
+                builder: (context, state) {
+                  if (state == const LoginState.loading()) {
+                    return const Center(
+                      child: SizedBox(
+                        width: 22, // Atur lebar sesuai dengan keinginan Anda
+                        height: 22, // Atur tinggi sesuai dengan keinginan Anda
+                        child: CircularProgressIndicator(
+                          strokeWidth:
+                              3, // Atur lebar garis progress sesuai keinginan Anda
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    );
+                  }
+                },
               ),
             )
           ],

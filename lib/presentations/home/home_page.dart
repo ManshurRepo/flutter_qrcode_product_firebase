@@ -224,7 +224,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:flutter_scanqr/bloc_firebase/product/product_bloc.dart';
 import 'package:flutter_scanqr/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
 import 'package:flutter_scanqr/presentations/auth/bloc/logout/logout_bloc.dart';
@@ -283,7 +282,7 @@ class HomePageState extends State<HomePage> {
         ),
         body: GridView.builder(
           padding: const EdgeInsets.all(20),
-          itemCount: 4,
+          itemCount: 3,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 20,
@@ -391,15 +390,15 @@ class HomePageState extends State<HomePage> {
                   }
                 };
                 break;
-              case 3:
-                title = "Download PDF";
-                icon = Icons.picture_as_pdf;
-                onTap = () {
-                  context.read<ProductBloc>().add(ExportProductEventToPdf());
-                };
-                break;
-              default:
-                break;
+              // case 3:
+              //   title = "Download PDF";
+              //   icon = Icons.picture_as_pdf;
+                // onTap = () {
+                //   context.read<ProductBloc>().add(ExportProductEventToPdf());
+              //   };
+              //   break;
+              // default:
+              //   break;
             }
 
             return Material(
@@ -408,27 +407,10 @@ class HomePageState extends State<HomePage> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(20),
                 onTap: onTap,
-                child: Column(
+                child:  Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    (index == 3)
-                        ? BlocConsumer<ProductBloc, ProductState>(
-                            listener: (context, state) {},
-                            builder: (context, state) {
-                              if (state is StateLoadingExport) {
-                                return const CircularProgressIndicator();
-                              }
-                              return SizedBox(
-                                height: 50,
-                                width: 50,
-                                child: Icon(
-                                  icon,
-                                  size: 50,
-                                ),
-                              );
-                            },
-                          )
-                        : Icon(
+                   Icon(
                             icon,
                             size: 50,
                           ),
