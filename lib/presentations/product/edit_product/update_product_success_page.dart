@@ -21,32 +21,29 @@ class _SuccessPageState extends State<EditProductSuccessPage> {
           backgroundColor: Colors.white,
           animationType: AnimationType.grow,
           animationDuration: Duration(seconds: 1),
-          ),
+        ),
         type: AlertType.success,
-        desc: "Target Berhasil diedit",
+        desc: "Produk Berhasil diedit",
         buttons: [
           DialogButton(
-            onPressed: () =>
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            onPressed: () => Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
               return const ProductsPage();
             })),
             width: 120,
-            color: Colors.yellow,
+            color: Colors.blue,
             child: const Text(
               "OK",
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
-
         ],
       ).show();
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-    );
+    return const Scaffold();
   }
 }

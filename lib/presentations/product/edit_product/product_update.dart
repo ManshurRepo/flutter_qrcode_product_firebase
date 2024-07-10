@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/data/models/request/edit_product_request_model.dart';
 import 'package:flutter_scanqr/data/models/response/product_response_model.dart';
 import 'package:flutter_scanqr/presentations/product/add_product/bloc/add_produk_bloc.dart';
+import 'package:flutter_scanqr/presentations/product/edit_product/update_product_success_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import 'delete_product_success_page copy.dart';
+
 class UpdateProductPage extends StatefulWidget {
-  const UpdateProductPage(this.id, this.produk, {Key? key}) : super(key: key);
+  const UpdateProductPage(this.id, this.produk, {super.key});
 
   final String id;
   final Produk produk;
@@ -226,89 +229,116 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
               ),
             ),
             const SizedBox(height: 30),
-            BlocListener<AddProdukBloc, AddProdukState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  loaded: (_) {
-                    Navigator.pop(
-                        context, 'success'); // Pop dengan hasil 'success'
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Product updated successfully!'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  },
-                  error: (message) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to update product: $message'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  },
-                  orElse: () {},
+            ElevatedButton(
+              onPressed: () {
+                final model = EditProductRequestModel(
+                  idProduk: widget.produk.idProduk,
+                  namaProduk: nameController.text,
+                  kodeProduk: codeController.text,
+                  jumlahProduk: int.tryParse(qtyController.text) ?? 0,
+                  sku: skuController.text,
+                  sn: snController.text,
+                  lisensi1: lisensiController.text,
+                  lisensi2: lisensi2Controller.text,
+                  divisi: divisiController.text,
+                  keterangan: keteranganController.text,
+                  tanggalOrder: orderController.text,
+                  tanggalTerima: receiptController.text,
+                  tanggalExpired: expiredController.text,
+                  posisi: posisiController.text,
+                  status: statusController.text,
                 );
+                context
+                    .read<AddProdukBloc>()
+                    .add(AddProdukEvent.editProduk(model.idProduk, model));
               },
-              child: BlocBuilder<AddProdukBloc, AddProdukState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () => ElevatedButton(
-                      onPressed: () {
-                        final model = EditProductRequestModel(
-                          idProduk: widget.produk.idProduk,
-                          namaProduk: nameController.text,
-                          kodeProduk: codeController.text,
-                          jumlahProduk: int.tryParse(qtyController.text) ?? 0,
-                          sku: skuController.text,
-                          sn: snController.text,
-                          lisensi1: lisensiController.text,
-                          lisensi2: lisensi2Controller.text,
-                          divisi: divisiController.text,
-                          keterangan: keteranganController.text,
-                          tanggalOrder: orderController.text,
-                          tanggalTerima: receiptController.text,
-                          tanggalExpired: expiredController.text,
-                          posisi: posisiController.text,
-                          status: statusController.text,
-                        );
-                        context.read<AddProdukBloc>().add(
-                            AddProdukEvent.editProduk(model.idProduk, model));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: const Text(
-                        'Update',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ),
-                    loading: () {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              child: BlocConsumer<AddProdukBloc, AddProdukState>(
+                listener: (context, state) {
+                  state.maybeWhen(
+                    loaded: (state) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const EditProductSuccessPage()),
                       );
                     },
+                    error: (message) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Edit Product Error: $message'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    },
+                    orElse: () {},
                   );
+                },
+                builder: (context, state) {
+                  if (state == const AddProdukState.loading()) {
+                    return const Center(
+                      child: SizedBox(
+                        width: 22,
+                        height: 22,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 3,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const Text(
+                      "Update Product",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    );
+                  }
                 },
               ),
             ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                final productId = widget.produk.idProduk;
-                context
-                    .read<AddProdukBloc>()
-                    .add(AddProdukEvent.deleteProduk(productId));
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Konfirmasi'),
+                      content: const Text(
+                          'Apakah anda yakin akan menghapus kegiatan ini?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context); // Tutup dialog
+                          },
+                          child: const Text('No'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            final productId = widget.produk.idProduk;
+                            context
+                                .read<AddProdukBloc>()
+                                .add(AddProdukEvent.deleteProduk(productId));
+                            Navigator.pop(context); // Tutup dialog
+                            // Tambahkan navigator untuk navigasi ke halaman sukses penghapusan
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) {
+                              return const DeleteSuccessPage();
+                            }));
+                          },
+                          child: const Text('Yes'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               child: BlocConsumer<AddProdukBloc, AddProdukState>(
                 listener: (context, state) {
                   state.maybeWhen(
-                    deleteLoading: () {
-                      // Tidak perlu melakukan apa pun di sini karena kita menangani tampilan di builder.
-                    },
                     deleteLoaded: (_) {
-                      Navigator.pop(context, 'success');
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Product deleted successfully!'),
@@ -331,11 +361,10 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
                   if (state == const AddProdukState.deleteLoading()) {
                     return const Center(
                       child: SizedBox(
-                        width: 22, // Atur lebar sesuai dengan keinginan Anda
-                        height: 22, // Atur tinggi sesuai dengan keinginan Anda
+                        width: 22,
+                        height: 22,
                         child: CircularProgressIndicator(
-                          strokeWidth:
-                              3, // Atur lebar garis progress sesuai keinginan Anda
+                          strokeWidth: 3,
                           valueColor:
                               AlwaysStoppedAnimation<Color>(Colors.white),
                         ),

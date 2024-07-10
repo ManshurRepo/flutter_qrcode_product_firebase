@@ -23,7 +23,20 @@ class AuthRemoteDatasource {
     if (response.statusCode == 200) {
       return Right(AuthResponseModel.fromJson(response.body));
     } else {
-      return const Left('register gagal');
+      String errorMessage = "Register Error";
+
+      try {
+        Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        if (jsonResponse.containsKey('error')) {
+          errorMessage = jsonResponse['error'];
+        } else if (jsonResponse.containsKey('message')) {
+          errorMessage = jsonResponse['message'];
+        }
+      } catch (e) {
+        print("Error parsing JSON response: $e");
+      }
+
+      return Left(errorMessage);
     }
   }
 
@@ -58,8 +71,20 @@ class AuthRemoteDatasource {
     if (response.statusCode == 200) {
       return Right(AuthResponseModel.fromJson(response.body));
     } else {
-      return const Left("Login Gagal");
+      String errorMessage = "Login Gagal";
+
+      try {
+        Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        if (jsonResponse.containsKey('error')) {
+          errorMessage = jsonResponse['error'];
+        } else if (jsonResponse.containsKey('message')) {
+          errorMessage = jsonResponse['message'];
+        }
+      } catch (e) {
+        print("Error parsing JSON response: $e");
+      }
+
+      return Left(errorMessage);
     }
   }
-
 }

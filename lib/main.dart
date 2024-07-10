@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_scanqr/data/datasources/product_remote_datasource.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_scanqr/data/models/response/auth_response_model.dart';
 import 'package:flutter_scanqr/presentations/auth/bloc/bloc/login_bloc.dart';
 import 'package:flutter_scanqr/presentations/auth/bloc/logout/logout_bloc.dart';
 import 'package:flutter_scanqr/presentations/auth/bloc/register/auth_bloc_bloc.dart';
-import 'package:flutter_scanqr/presentations/auth/login_page.dart';
 import 'package:flutter_scanqr/presentations/product/add_product/bloc/add_produk_bloc.dart';
 import 'package:flutter_scanqr/presentations/product/detail_product/bloc/produk_bloc.dart';
 

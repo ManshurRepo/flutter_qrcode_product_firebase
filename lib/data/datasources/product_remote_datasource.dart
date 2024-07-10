@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_scanqr/data/models/request/edit_product_request_model.dart';
@@ -40,7 +39,7 @@ class ProductRemoteDatasource {
     if (response.statusCode == 201) {
       return Right(AddProductResponseModel.fromJson(response.body));
     } else {
-      return Left('Server Error');
+      return const Left('Server Error');
     }
   }
 
@@ -61,7 +60,7 @@ class ProductRemoteDatasource {
     if (response.statusCode == 200) {
       return Right(AddProductResponseModel.fromJson(response.body));
     } else {
-      return Left('Server Error');
+      return const Left('Server Error');
     }
   }
 
@@ -79,7 +78,7 @@ class ProductRemoteDatasource {
     if (response.statusCode == 200) {
       return Right(AddProductResponseModel.fromJson(response.body));
     } else {
-      return Left('Server Error');
+      return const Left('Server Error');
     }
   }
 }

@@ -68,17 +68,17 @@ class LoginPage extends StatelessWidget {
                             builder: (context) => const HomePage()),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Register Success!'),
-                          backgroundColor: Colors.green,
+                         const SnackBar(
+                          content: Text('Login Success!', style: TextStyle(fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold), ),
+                          backgroundColor: Color.fromARGB(255, 19, 255, 27),
                         ),
                       );
                     },
                     error: (message) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Register Error: $message'),
-                          backgroundColor: Colors.red,
+                          content: Text('Login Error: $message', style: const TextStyle(fontSize: 17,  fontWeight: FontWeight.bold),),
+                          backgroundColor: const Color.fromARGB(255, 255, 72, 59),
                         ),
                       );
                     },

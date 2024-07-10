@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_scanqr/data/models/request/auth_register_request_model.dart';
 import 'package:flutter_scanqr/presentations/auth/bloc/register/auth_bloc_bloc.dart';
-import 'package:flutter_scanqr/presentations/auth/login_page.dart';
 import 'package:flutter_scanqr/presentations/home/home_page.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -79,20 +78,31 @@ class RegisterPage extends StatelessWidget {
                       AuthLocalDatasource().saveAuthData(state);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Register Success!'),
-                          backgroundColor: Colors.green,
+                          content: Text(
+                            'Register Success!',
+                            style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          backgroundColor: Color.fromARGB(255, 19, 255, 27),
                         ),
                       );
                     },
                     error: (message) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Register Error: $message'),
-                          backgroundColor: Colors.red,
+                          content: Text(
+                            message,
+                            style: const TextStyle(
+                                fontSize: 17, fontWeight: FontWeight.bold),
+                          ),
+                          backgroundColor: const Color.fromARGB(255, 255, 72, 59),
                         ),
                       );
                     },

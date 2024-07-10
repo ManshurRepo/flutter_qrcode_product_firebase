@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_scanqr/data/models/request/product_request_model.dart';
+import 'package:flutter_scanqr/presentations/product/add_product/add_product_success_page.dart';
 import 'package:flutter_scanqr/presentations/product/add_product/bloc/add_produk_bloc.dart';
+
+import '../../home/home_page.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});
@@ -202,71 +204,74 @@ class _AddProductPageState extends State<AddProductPage> {
               ),
             ),
             const SizedBox(height: 30),
-            BlocListener<AddProdukBloc, AddProdukState>(
-              listener: (context, state) {
-                state.maybeWhen(
-                  loaded: (_) {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Product added successfully!'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  },
-                  error: (message) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Failed to add product: $message'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  },
-                  orElse: () {},
+            ElevatedButton(
+              onPressed: () {
+                final model = ProductRequestModel(
+                  namaProduk: nameController.text,
+                  kodeProduk: codeController.text,
+                  jumlahProduk: int.tryParse(qtyController.text) ?? 0,
+                  sku: skuController.text,
+                  sn: snController.text,
+                  lisensi1: lisensi1Controller.text,
+                  lisensi2: lisensi2Controller.text,
+                  divisi: divisiController.text,
+                  keterangan: keteranganController.text,
+                  tanggalOrder: orderController.text,
+                  tanggalTerima: receiptController.text,
+                  tanggalExpired: expiredController.text,
+                  posisi: posisiController.text,
+                  status: statusController.text,
                 );
+                context
+                    .read<AddProdukBloc>()
+                    .add(AddProdukEvent.addProduk(model));
               },
-              child: BlocBuilder<AddProdukBloc, AddProdukState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () => ElevatedButton(
-                      onPressed: () {
-                        final model = ProductRequestModel(
-                          namaProduk: nameController.text,
-                          kodeProduk: codeController.text,
-                          jumlahProduk: int.tryParse(qtyController.text) ?? 0,
-                          sku: skuController.text,
-                          sn: snController.text,
-                          lisensi1: lisensi1Controller.text,
-                          lisensi2: lisensi2Controller.text,
-                          divisi: divisiController.text,
-                          keterangan: keteranganController.text,
-                          tanggalOrder: orderController.text,
-                          tanggalTerima: receiptController.text,
-                          tanggalExpired: expiredController.text,
-                          posisi: posisiController.text,
-                          status: statusController.text,
-                        );
-                        context
-                            .read<AddProdukBloc>()
-                            .add(AddProdukEvent.addProduk(model));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      child: const Text(
-                        'Add Product',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ),
-                    loading: () {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              child: BlocConsumer<AddProdukBloc, AddProdukState>(
+                listener: (context, state) {
+                  state.maybeWhen(
+                    loaded: (state) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const AddProductSuccessPage()),
                       );
                     },
+                    error: (message) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Add Produk Error: $message'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    },
+                    orElse: () {},
                   );
                 },
+                builder: (context, state) {
+                  if (state == const AddProdukState.loading()) {
+                    return const Center(
+                      child: SizedBox(
+                        width: 22, // Atur lebar sesuai dengan keinginan Anda
+                        height: 22, // Atur tinggi sesuai dengan keinginan Anda
+                        child: CircularProgressIndicator(
+                          strokeWidth:
+                              3, // Atur lebar garis progress sesuai keinginan Anda
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const Text(
+                      "Add Product",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    );
+                  }
+                },
               ),
-            ),
+            )
           ],
         ),
       ),
