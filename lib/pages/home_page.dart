@@ -40,7 +40,7 @@ class HomePageState extends State<HomePage> {
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthStateLogout) {
-                  return context.goNamed(Routes.home);
+                  return context.goNamed(Routes.login);
                 }
               },
               builder: (context, state) {
@@ -59,7 +59,7 @@ class HomePageState extends State<HomePage> {
         ),
         body: GridView.builder(
           padding: const EdgeInsets.all(20),
-          itemCount: 4,
+          itemCount: 3,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 20,
@@ -129,13 +129,13 @@ class HomePageState extends State<HomePage> {
                   }
                 };
                 break;
-              case 3:
-                title = "Download PDF";
-                icon = Icons.picture_as_pdf;
-                onTap = () {
-                  context.read<ProductBloc>().add(ExportProductEventToPdf());
-                };
-                break;
+              // case 3:
+              //   title = "Download PDF";
+              //   icon = Icons.picture_as_pdf;
+              //   onTap = () {
+              //     context.read<ProductBloc>().add(ExportProductEventToPdf());
+              //   };
+              //   break;
             }
 
             return Material(
